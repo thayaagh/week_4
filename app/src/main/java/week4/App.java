@@ -3,6 +3,16 @@
  */
 package week4;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
+
 import com.indvd00m.ascii.render.Render;
 import com.indvd00m.ascii.render.api.ICanvas;
 import com.indvd00m.ascii.render.api.IContextBuilder;
@@ -14,7 +24,7 @@ public class App {
         return "Hello World!";
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         // Ascii Render Example
         IRender render = new Render();
@@ -26,6 +36,22 @@ public class App {
 		System.out.println(s);
 
         System.out.println(new App().getGreeting());
+
+        // PDFBox Test
+        PDDocument helloPdf = new PDDocument();
+        PDPage page = new PDPage(PDRectangle.A4);
+        helloPdf.addPage(page);
+
+        PDPageContentStream contentStream = new PDPageContentStream(helloPdf, page);
+        contentStream.beginText();
+        contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 40);
+        contentStream.newLineAtOffset(10, 100);
+        contentStream.showText("Hello thayaagh!!!");
+        contentStream.endText();
+        contentStream.close();
+
+        helloPdf.save(new File("C:\\Users\\ATH\\Documents\\OneDrive - ZHAW\\Master\\11. Semester_2\\DevOps\\Week4\\week_4\\thayaagh.pdf"));
+        helloPdf.close();
 
     }
 }

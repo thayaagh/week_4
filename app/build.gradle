@@ -26,6 +26,7 @@ dependencies {
 
     // added by thayaagh
     implementation 'com.indvd00m.ascii.render:ascii-render:2.2.0'
+    implementation 'org.apache.pdfbox:pdfbox:3.0.2'
 
 }
 
